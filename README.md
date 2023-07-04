@@ -27,7 +27,7 @@ O programa oferece as seguintes funcionalidades:
 ## Observações
 
 - O programa utiliza uma matriz para armazenar as tarefas, onde cada linha representa uma tarefa e cada coluna contém informações como nome, descrição, data e status.
-- As datas das tarefas devem ser inseridas no formato "dd/mm/yy".
+- As datas das tarefas devem ser inseridas no formato "dd/mm/yyyy" ou "dd/mm/yy".
 - O programa realiza validações básicas para garantir que as entradas do usuário sejam válidas.
 - O programa exibe mensagens de confirmação ou erro ao executar as operações.
 
