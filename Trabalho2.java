@@ -4,6 +4,15 @@ import java.util.Scanner;
 import java.util.regex.Pattern;
 
 public class Trabalho2 {
+    public static void FillTasks(String[][] matriz, int lines, int columns) {
+        int i;
+        for (i = 0; i < lines; i++) {
+            matriz[i][0] = "Nome:";
+            matriz[i][1] = "Descrição:";
+            matriz[i][2] = "Data:";
+            matriz[i][3] = "Status:";
+        }
+    }
 
     public static void CreateNewTask(String[][] matriz, int lines, int columns) {
         Scanner scanner = new Scanner(System.in);
@@ -150,10 +159,10 @@ public class Trabalho2 {
         for (int i = 0; i < lines; i++) {
             if (matriz[i][0] != null && matriz[i][0].equals("Nome: " + taskName)) {
                 search = true;
-                matriz[i][0] = null;
-                matriz[i][1] = null;
-                matriz[i][2] = null;
-                matriz[i][3] = null;
+                matriz[i][0] = "Nome:";
+                matriz[i][1] = "Descrição:";
+                matriz[i][2] = "Data:";
+                matriz[i][3] = "Status:";
                 break;
             }
         }
@@ -161,7 +170,7 @@ public class Trabalho2 {
             System.out.println("A tarefa foi excluida com sucesso!");
             Space();
         } else {
-            System.out.println("Tarefa inexistenete!");
+            System.out.println("Tarefa inexistente!");
             Space();
         }
 
@@ -282,6 +291,7 @@ public class Trabalho2 {
         } while (lines <= 0);
 
         list = new String[lines][columns];
+        FillTasks(list, lines, columns);
         do {
             PrintTaskList();
             PrintTaskListOptions();
