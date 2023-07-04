@@ -7,7 +7,7 @@ public class Trabalho2 {
 
     public static void CreateNewTask(String[][] matriz, int lines, int columns) {
         Scanner scanner = new Scanner(System.in);
-        int linha;
+        int line;
         String data;
         String taskName;
         int option;
@@ -18,11 +18,11 @@ public class Trabalho2 {
         ShowTasks(matriz, lines, columns);
         do {
             System.out.println("Informe onde você deseja inserir o produto com valores de 1 à " + lines);
-            linha = scanner.nextInt();
-            if(linha < 1 || linha > lines) {
+            line = scanner.nextInt();
+            if(line < 1 || line > lines) {
                 System.out.println("Local inválido!");
             }
-        } while (linha < 1 || linha > lines);
+        } while (line < 1 || line > lines);
         System.out.println("Insira o nome da nova tarefa: ");
         taskName = scanner.next();
         for (int i = 0; i < lines; i++) {
@@ -51,12 +51,12 @@ public class Trabalho2 {
 
 
         if (!taskExist) {
-            matriz[linha - 1][0] = "Nome: " + taskName;
+            matriz[line - 1][0] = "Nome: " + taskName;
             System.out.println("Insira a descrição da nova tarefa:");
-            matriz[linha - 1][1] = "Descrição: " + scanner.next();
+            matriz[line - 1][1] = "Descrição: " + scanner.next();
             System.out.println("Insira a data da nova tarefa:");
             data = scanner.next();
-            DataInsert(matriz, data, linha - 1);
+            DataInsert(matriz, data, line - 1);
             do {
                 System.out.println("Escolha o Status da nova tarefa:");
                 System.out.println("1 - A Fazer");
@@ -69,11 +69,11 @@ public class Trabalho2 {
                 Space();
             } while (option < 1 || option > 3);
             if (option == 1) {
-                matriz[linha - 1][3] = "Status: A Fazer";
+                matriz[line - 1][3] = "Status: A Fazer";
             } else if (option == 2) {
-                matriz[linha - 1][3] = "Status: Fazendo";
+                matriz[line - 1][3] = "Status: Fazendo";
             } else {
-                matriz[linha - 1][3] = "Status: Completa";
+                matriz[line - 1][3] = "Status: Completa";
             }
         }
 
@@ -95,13 +95,13 @@ public class Trabalho2 {
     }
 
 
-    public static void EditTask(String[][] matriz, int lines, String nomeTarefa) {
+    public static void EditTask(String[][] matriz, int lines, String taskName) {
         Scanner scanner = new Scanner(System.in);
         boolean search = false;
-        int opcao;
-        String alteracao;
+        int option;
+        String alteration;
         for (int i = 0; i < lines; i++) {
-            if (matriz[i][0] != null && matriz[i][0].equals("Nome: " + nomeTarefa)) {
+            if (matriz[i][0] != null && matriz[i][0].equals("Nome: " + taskName)) {
                 search = true;
                 do {
                     System.out.println(matriz[i][0] + " | " + matriz[i][1] + " | " + matriz[i][2] + " | " + matriz[i][3]);
@@ -109,29 +109,29 @@ public class Trabalho2 {
                     System.out.println("1 - Nome");
                     System.out.println("2 - Descrição");
                     System.out.println("3 - Data");
-                    opcao = scanner.nextInt();
+                    option = scanner.nextInt();
                     Space();
-                } while (opcao < 1 || opcao > 3);
+                } while (option < 1 || option > 3);
 
-                switch (opcao) {
+                switch (option) {
                     case 1:
                         System.out.println("Insira o novo nome para a tarefa " + matriz[i][0]);
-                        alteracao = scanner.next();
-                        matriz[i][0] = "Nome: " + alteracao;
+                        alteration = scanner.next();
+                        matriz[i][0] = "Nome: " + alteration;
                         Space();
                         break;
 
                     case 2:
                         System.out.println("Insira a nova descrição para a tarefa " + matriz[i][0]);
-                        alteracao = scanner.next();
-                        matriz[i][1] = "Descrição: " + alteracao;
+                        alteration = scanner.next();
+                        matriz[i][1] = "Descrição: " + alteration;
                         Space();
                         break;
 
                     case 3:
                         System.out.println("Insira a nova data para a tarefa " + matriz[i][0]);
-                        alteracao = scanner.next();
-                        DataInsert(matriz, alteracao, i);
+                        alteration = scanner.next();
+                        DataInsert(matriz, alteration, i);
                         Space();
                         break;
 
@@ -150,10 +150,10 @@ public class Trabalho2 {
         }
     }
 
-    public static void DeleteTask(String[][] matriz, int lines, String nomeTarefa) {
+    public static void DeleteTask(String[][] matriz, int lines, String taskName) {
         boolean search = false;
         for (int i = 0; i < lines; i++) {
-            if (matriz[i][0] != null && matriz[i][0].equals("Nome: " + nomeTarefa)) {
+            if (matriz[i][0] != null && matriz[i][0].equals("Nome: " + taskName)) {
                 search = true;
                 matriz[i][0] = null;
                 matriz[i][1] = null;
@@ -172,24 +172,24 @@ public class Trabalho2 {
 
     }
 
-    public static boolean DateVerify(String data) {
+    public static boolean DateVerify(String date) {
         String regex = "^([0-2][0-9]|3[0-1])/(0[0-9]|1[0-2])/([0-9][0-9])?[0-9][0-9]$";
-        return Pattern.matches(regex, data);
+        return Pattern.matches(regex, date);
     }
 
-    public static void DataInsert(String[][] matriz, String data, int i) {
+    public static void DataInsert(String[][] matriz, String date, int i) {
         Scanner scanner = new Scanner(System.in);
         boolean verify;
 
-        verify = DateVerify(data);
+        verify = DateVerify(date);
 
         while (!verify) {
             System.out.println("Formato de data inválida, insira no formato dd/mm/yy");
-            data = scanner.next();
-            verify = DateVerify(data);
+            date = scanner.next();
+            verify = DateVerify(date);
             Space();
         }
-        matriz[i][2] = "Data: " + data;
+        matriz[i][2] = "Data: " + date;
     }
 
     public static void StatusController(String[][] matriz, String taskName, int lines) {
@@ -257,7 +257,7 @@ public class Trabalho2 {
     }
 
     public static void PrintTaskList() {
-        System.out.println("LISTA DE TAREFAS");
+        System.out.println("--LISTA DE TAREFAS--");
     }
 
     public static void PrintTaskListOptions () {
@@ -277,59 +277,59 @@ public class Trabalho2 {
     public static void main(String[] args) {
 
         String[][] lista;
-        int linhas, opcao;
-        int colunas = 4;
+        int lines, option;
+        int columns = 4;
         Scanner scanner = new Scanner(System.in);
-        String nomeTarefa;
+        String taskName;
         do {
             System.out.println("Insira o tamanho de sua lista de tarefas: ");
-            linhas = scanner.nextInt();
+            lines = scanner.nextInt();
             Space();
-        } while (linhas <= 0);
+        } while (lines <= 0);
 
-        lista = new String[linhas][colunas];
+        lista = new String[lines][columns];
         do {
             PrintTaskList();
             PrintTaskListOptions();
-            opcao = scanner.nextInt();
-            while (opcao < 1 || opcao > 6) {
+            option = scanner.nextInt();
+            while (option < 1 || option > 6) {
                 System.out.println("Opção inválida!");
                 PrintTaskList();
                 PrintTaskListOptions();
-                opcao = scanner.nextInt();
+                option = scanner.nextInt();
                 Space();
             }
             Space();
-            switch (opcao) {
+            switch (option) {
                 case 1:
-                    CreateNewTask(lista, linhas, colunas);
+                    CreateNewTask(lista, lines, columns);
                     Space();
                     break;
 
                 case 2:
                     PrintTaskList();
-                    ShowTasks(lista, linhas, colunas);
+                    ShowTasks(lista, lines, columns);
                     Space();
                     break;
 
                 case 3:
                     System.out.println("Insira o nome da tarefa que deseja editar:");
-                    nomeTarefa = scanner.next();
-                    EditTask(lista, linhas, nomeTarefa);
+                    taskName = scanner.next();
+                    EditTask(lista, lines, taskName);
                     Space();
                     break;
 
                 case 4:
                     System.out.println("Insira o nome da tarefa que deseja alterar o status:");
-                    nomeTarefa = scanner.next();
-                    StatusController(lista, nomeTarefa, linhas);
+                    taskName = scanner.next();
+                    StatusController(lista, taskName, lines);
                     Space();
                     break;
 
                 case 5:
                     System.out.println("Insira o nome da tarefa que deseja excluir:");
-                    nomeTarefa = scanner.next();
-                    DeleteTask(lista, linhas, nomeTarefa);
+                    taskName = scanner.next();
+                    DeleteTask(lista, lines, taskName);
                     Space();
                     break;
 
@@ -343,7 +343,7 @@ public class Trabalho2 {
                     Space();
 
             }
-        } while (opcao != 6);
+        } while (option != 6);
 
     }
 }
